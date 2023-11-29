@@ -11,8 +11,7 @@ class CustomStudentInfoView: UIView {
 
     private let containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
-        view.layer.cornerRadius = 16
+        view.backgroundColor = UIColor(red: 31/255, green: 15/255, blue: 76/255, alpha: 1)
         return view
     }()
 

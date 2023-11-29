@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = StudentProfileViewController() // UINavigationController(rootViewController: MainViewController())
+        window?.rootViewController = TournamentViewController()// UINavigationController(rootViewController: MainViewController()) //UINavigationController(rootViewController: CoachViewController(id: "bde9b3d2-822d-4bb4-9c12-64ad161e788d")) //CoachViewController()//StudentProfileViewController(id: "a6f8ee69-053b-4936-bd29-4e44973364f3") // UINavigationController(rootViewController: MainViewController())
         window?.makeKeyAndVisible()
     }
 

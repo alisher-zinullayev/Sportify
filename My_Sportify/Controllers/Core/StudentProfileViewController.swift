@@ -12,7 +12,16 @@ final class StudentProfileViewController: UIViewController {
     var last_fights: [StudentLastFights] = []
     var student_info: StudentInfo?
     var results_in_competitions: [ResultInCompetition]?
+    var id: String
     
+    init(id: String) {
+        self.id = id
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let viewInformation: CustomStudentInfoView = {
         let view = CustomStudentInfoView()
@@ -20,28 +29,22 @@ final class StudentProfileViewController: UIViewController {
         return view
     }()
     
-    private let lastFightsButton: UIButton = {
+    lazy var lastFightsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Последние бои", for: .normal)
-        button.backgroundColor = UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(lastFightsButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private let fightResultsButton: UIButton = {
+    lazy var fightResultsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Результаты в соревнованиях", for: .normal)
-        button.backgroundColor = UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        button.setTitleColor(.lightGray, for: .normal)
         button.addTarget(self, action: #selector(fightResultsButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -73,7 +76,7 @@ final class StudentProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white // UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
+        view.backgroundColor = UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
         setupUI()
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -81,7 +84,7 @@ final class StudentProfileViewController: UIViewController {
         Task { [weak self] in
             guard let self = self else {return}
             do {
-                let values = try await DefaultStudentInformation.shared.fetchStudentInformation(for: "a6f8ee69-053b-4936-bd29-4e44973364f3")
+                let values = try await DefaultStudentInformation.shared.fetchStudentInformation(for: id)
                 self.student_info = values
                 
             } catch {
@@ -89,19 +92,20 @@ final class StudentProfileViewController: UIViewController {
             }
 
             viewInformation.setupValues(for: student_info ?? StudentInfo(id: "1", first_name: "1", last_name: "1", image: "1", club: Club(id: "", name: "", logo: "", location: ""), location: "", coach: Coach(id: "", first_name: "", last_name: "", image: ""), date_of_birth: "", achievement: "", is_republic_winner: false), image: UIImage())
+            
+            collectionView.reloadData()
         }
         
         
         Task { [weak self] in
             guard let self = self else {return}
             do {
-                let values = try await DefaultStudentResults.shared.fetchStudentResults(for: "a6f8ee69-053b-4936-bd29-4e44973364f3")
+                let values = try await DefaultStudentResults.shared.fetchStudentResults(for: id)
                 self.results_in_competitions = values
-                print("results_in_competitions")
-                print(results_in_competitions)
             } catch {
                 print("error fetching information for a given student \(error)")
             }
+            collectionView.reloadData()
         }
         
         // working
@@ -109,14 +113,12 @@ final class StudentProfileViewController: UIViewController {
         Task { [weak self] in
             guard let self = self else {return}
             do {
-                let values = try await DefaultLastFightsOfStudent.shared.fetchLastFights(for: "a6f8ee69-053b-4936-bd29-4e44973364f3")
+                let values = try await DefaultLastFightsOfStudent.shared.fetchLastFights(for: id)
                 self.last_fights = values
-                print("last fights")
-                print(last_fights)
-                
             } catch {
                 print("error fetching last fights information for a given student \(error)")
             }
+            collectionView.reloadData()
         }
     }
     
@@ -134,17 +136,12 @@ final class StudentProfileViewController: UIViewController {
         
         lastFightsButton.snp.makeConstraints { maker in
             maker.top.equalTo(viewInformation.snp.bottom).offset(5)
-            maker.leading.equalToSuperview().offset(20)
-            maker.width.equalTo(150)
-            maker.height.equalTo(30)
+            maker.leading.equalToSuperview().offset(16)
         }
         
         fightResultsButton.snp.makeConstraints { maker in
             maker.top.equalTo(viewInformation.snp.bottom).offset(5)
-            maker.leading.equalTo(lastFightsButton.snp.trailing).offset(10)
-            maker.trailing.equalToSuperview().inset(20)
-            maker.width.equalTo(lastFightsButton.snp.width)
-            maker.height.equalTo(lastFightsButton.snp.height)
+            maker.leading.equalTo(lastFightsButton.snp.trailing).offset(8)
         }
         
         collectionView.snp.makeConstraints { make in
@@ -161,16 +158,18 @@ extension StudentProfileViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0 {
+        if indexPath.row == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
             cell.pageNumber = 0
             cell.last_fights = last_fights
+            cell.results = results_in_competitions
             return cell
         }
-        if indexPath.item == 1 {
+        if indexPath.row == 1 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
             cell.pageNumber = 1
             cell.results = results_in_competitions
+            cell.last_fights = last_fights
             return cell
         }
         return UICollectionViewCell()

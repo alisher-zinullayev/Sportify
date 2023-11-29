@@ -11,6 +11,16 @@ class CoachViewController: UIViewController {
     
     var coach: CoachInfo?
     var students: [Student]?
+    var id: String
+    
+    init(id: String) {
+        self.id = id
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let viewInformation: CustomCoachInfoView = {
         let view = CustomCoachInfoView()
@@ -48,10 +58,9 @@ class CoachViewController: UIViewController {
         studentsTableView.dataSource = self
         Task { [weak self] in
             do {
-                let values = try await DefaultCoachInformation.shared.fetchCoachInformation(for: "bde9b3d2-822d-4bb4-9c12-64ad161e788d")
+                let values = try await DefaultCoachInformation.shared.fetchCoachInformation(for: id)
                 self?.coach = values
                 self?.students = values.students
-                print(students)
             } catch {
                 print("error fetching coach: \(error)")
             }
@@ -110,6 +119,9 @@ extension CoachViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.setupValues(for: students?[indexPath.row] ?? Student(id: "", first_name: "", last_name: "", image: ""))
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(StudentProfileViewController(id: students?[indexPath.row].id ?? ""), animated: true)
     }
 }
 

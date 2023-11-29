@@ -71,9 +71,14 @@ class FightResultsTableViewCell: UITableViewCell {
         }
     }
     
-    func setValues(results: ResultInCompetition) {
+    func setValues(results: ResultInCompetition, index: Int) {
         tournamentName.text = results.competition.name
         place.text = String(results.place)
+        if index % 2 == 0 {
+            containerView.backgroundColor = UIColor(cgColor: CGColor(red: 80/255, green: 2/255, blue: 68/255, alpha: 1))
+        } else {
+            containerView.backgroundColor = UIColor(red: 0.09, green: 0.047, blue: 0.212, alpha: 1)
+        }
     }
     
     override func layoutSubviews() {

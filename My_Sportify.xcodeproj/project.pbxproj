@@ -43,6 +43,10 @@
 		439132262B166C3100AF453C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439132252B166C3100AF453C /* CollectionViewCell.swift */; };
 		439132282B167C2B00AF453C /* LastFightsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439132272B167C2B00AF453C /* LastFightsTableViewCell.swift */; };
 		4391322A2B167C3700AF453C /* FightResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439132292B167C3700AF453C /* FightResultsTableViewCell.swift */; };
+		43B83B5A2B17D41F00F4715A /* LastFightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B83B592B17D41F00F4715A /* LastFightsView.swift */; };
+		43B83B5C2B17ED1000F4715A /* ClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B83B5B2B17ED1000F4715A /* ClubView.swift */; };
+		43B83B5E2B17EFEC00F4715A /* TournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B83B5D2B17EFEC00F4715A /* TournamentViewController.swift */; };
+		43B83B602B17F16E00F4715A /* TournamentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43B83B5F2B17F16E00F4715A /* TournamentCollectionViewCell.swift */; };
 		F30CD6C8B49D695F66C419CC /* Pods_My_Sportify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A171F3AFBC705294F11F10B0 /* Pods_My_Sportify.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +89,10 @@
 		439132252B166C3100AF453C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		439132272B167C2B00AF453C /* LastFightsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFightsTableViewCell.swift; sourceTree = "<group>"; };
 		439132292B167C3700AF453C /* FightResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FightResultsTableViewCell.swift; sourceTree = "<group>"; };
+		43B83B592B17D41F00F4715A /* LastFightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastFightsView.swift; sourceTree = "<group>"; };
+		43B83B5B2B17ED1000F4715A /* ClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubView.swift; sourceTree = "<group>"; };
+		43B83B5D2B17EFEC00F4715A /* TournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentViewController.swift; sourceTree = "<group>"; };
+		43B83B5F2B17F16E00F4715A /* TournamentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E63738F163FB5A73BCF9726 /* Pods-My_Sportify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My_Sportify.debug.xcconfig"; path = "Target Support Files/Pods-My_Sportify/Pods-My_Sportify.debug.xcconfig"; sourceTree = "<group>"; };
 		A171F3AFBC705294F11F10B0 /* Pods_My_Sportify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Sportify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17581755595A27108C0664F /* Pods-My_Sportify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My_Sportify.release.xcconfig"; path = "Target Support Files/Pods-My_Sportify/Pods-My_Sportify.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +166,7 @@
 				4334B0652B13500800E79F83 /* StudentProfileViewController.swift */,
 				431B896D2B1684EC00614FB2 /* ClubViewController.swift */,
 				431B896F2B1684F100614FB2 /* CoachViewController.swift */,
+				43B83B5D2B17EFEC00F4715A /* TournamentViewController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -208,6 +217,9 @@
 				4327A3462B137FDE00234B4B /* CustomStudentInfoView.swift */,
 				431B89792B168A7600614FB2 /* CustomCoachInfoView.swift */,
 				431B897B2B1695FD00614FB2 /* StudentsTableViewCell.swift */,
+				43B83B592B17D41F00F4715A /* LastFightsView.swift */,
+				43B83B5B2B17ED1000F4715A /* ClubView.swift */,
+				43B83B5F2B17F16E00F4715A /* TournamentCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +363,7 @@
 				438C12872B120D9F00C5D84F /* AppDelegate.swift in Sources */,
 				438C129D2B121B0D00C5D84F /* TournamentDetail.swift in Sources */,
 				431B896E2B1684EC00614FB2 /* ClubViewController.swift in Sources */,
+				43B83B5C2B17ED1000F4715A /* ClubView.swift in Sources */,
 				438C12A92B123F0300C5D84F /* DefaultListOfTournamentsForRegion.swift in Sources */,
 				438C129F2B121CB300C5D84F /* DefaultListOfTournaments.swift in Sources */,
 				4327A3432B1368F100234B4B /* ResultsInCompetitions.swift in Sources */,
@@ -359,6 +372,7 @@
 				438C12A72B1239AF00C5D84F /* DefaultRegionsDataSource.swift in Sources */,
 				4391322A2B167C3700AF453C /* FightResultsTableViewCell.swift in Sources */,
 				4334B0682B13551700E79F83 /* StudentInfo.swift in Sources */,
+				43B83B5E2B17EFEC00F4715A /* TournamentViewController.swift in Sources */,
 				439132262B166C3100AF453C /* CollectionViewCell.swift in Sources */,
 				4327A3412B13651900234B4B /* DefaultStudentInformation.swift in Sources */,
 				439132282B167C2B00AF453C /* LastFightsTableViewCell.swift in Sources */,
@@ -372,8 +386,10 @@
 				431112FF2B16048B00FEF070 /* MainVCViewModel.swift in Sources */,
 				431B89702B1684F100614FB2 /* CoachViewController.swift in Sources */,
 				4327A3452B136A9600234B4B /* DefaultStudentResults.swift in Sources */,
+				43B83B602B17F16E00F4715A /* TournamentCollectionViewCell.swift in Sources */,
 				438C12AB2B12418E00C5D84F /* DefaultStockImageLoad.swift in Sources */,
 				438C12A12B1236A600C5D84F /* RegionDetailViewController.swift in Sources */,
+				43B83B5A2B17D41F00F4715A /* LastFightsView.swift in Sources */,
 				438C12892B120D9F00C5D84F /* SceneDelegate.swift in Sources */,
 				438C12B32B12482200C5D84F /* RegionImageView.swift in Sources */,
 				438C12A52B12391900C5D84F /* Regions.swift in Sources */,

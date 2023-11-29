@@ -12,8 +12,16 @@ class CollectionViewCell: UICollectionViewCell {
     static let identifier = String(describing: CollectionViewCell.self)
 
     var pageNumber: Int = 0
-    var results: [ResultInCompetition]?
-    var last_fights: [StudentLastFights]?
+    var results: [ResultInCompetition]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    var last_fights: [StudentLastFights]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -50,7 +58,11 @@ class CollectionViewCell: UICollectionViewCell {
 extension CollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if pageNumber == 0 {
-            return last_fights?.count ?? 10
+            if let lastFights = last_fights, lastFights.indices.contains(section) {
+                return lastFights[section].games.count
+            } else {
+                return 0
+            }
         } else {
             return results?.count ?? 0
         }
@@ -61,28 +73,20 @@ extension CollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: LastFightsTableViewCell.identifier, for: indexPath) as? LastFightsTableViewCell else {
                 return UITableViewCell()
             }
-//            print(last_fights)
-//            if let results = results, indexPath.row < results.count {
-//                cell.setValues(results: results[indexPath.row])
-//            }
-//            return cell
-//            if !last_fights.isEmpty, indexPath.row < last_fights.count {
-//                let studentLastFight = last_fights[indexPath.row]
-//                print(last_fights[indexPath.row].games.count)
-//                print(".............")
-//                print(studentLastFight.competition)
-//            }
+            if let lastFights = last_fights, lastFights.indices.contains(indexPath.section) {
+                let games = lastFights[indexPath.section].games
+                if games.indices.contains(indexPath.row) {
+                    let game = games[indexPath.row]
+                    cell.setValues(lastFight: game)
+                }
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FightResultsTableViewCell.identifier, for: indexPath) as? FightResultsTableViewCell else {
                 return UITableViewCell()
             }
-            print("......................")
-            print(results)
-            print(last_fights)
-            print("......................")
             if let results = results, indexPath.row < results.count {
-                cell.setValues(results: results[indexPath.row])
+                cell.setValues(results: results[indexPath.row], index: indexPath.row)
             }
             return cell
         }
@@ -92,5 +96,38 @@ extension CollectionViewCell: UITableViewDelegate, UITableViewDataSource {
             return 80
         }
         return 60
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if pageNumber == 0 {
+            return results?.count ?? 0
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if pageNumber == 0 {
+            let headerView = LastFightsView()
+            if let lastFights = last_fights, lastFights.indices.contains(section) {
+                let competition = lastFights[section].competition
+                headerView.setupValues(startTime: competition.start_date, endTime: competition.end_date, givenTournament: competition.name)
+            } else {
+                headerView.setupValues(startTime: "", endTime: "", givenTournament: "")
+            }
+            tableView.sectionHeaderTopPadding = 0
+            return headerView
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if pageNumber == 0 {
+            return 50
+        } else {
+            tableView.sectionHeaderTopPadding = 0
+            return 0
+        }
     }
 }
