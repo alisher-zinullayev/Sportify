@@ -1,0 +1,109 @@
+{
+    "data": [
+        {
+            "slug": "abai_region",
+            "region": "Абай облысы",
+            "image": null
+        },
+        {
+            "slug": "akmola_region",
+            "region": "Ақмола облысы",
+            "image": null
+        },
+        {
+            "slug": "aktobe_region",
+            "region": "Ақтөбе облысы",
+            "image": null
+        },
+        {
+            "slug": "almaty_city",
+            "region": "Алматы қаласы",
+            "image": null
+        },
+        {
+            "slug": "almaty_region",
+            "region": "Алматы облысы",
+            "image": null
+        },
+        {
+            "slug": "astana_city",
+            "region": "Астана қаласы",
+            "image": null
+        },
+        {
+            "slug": "baikonur_city",
+            "region": "Байқоңыр қаласы",
+            "image": null
+        },
+        {
+            "slug": "east_kazakhstan_region",
+            "region": "Шығыс Қазақстан облысы",
+            "image": null
+        },
+        {
+            "slug": "jambyl_region",
+            "region": "Жамбыл облысы",
+            "image": null
+        },
+        {
+            "slug": "jetisu_region",
+            "region": "Жетісу облысы",
+            "image": null
+        },
+        {
+            "slug": "karaganda_region",
+            "region": "Қарағанды облысы",
+            "image": null
+        },
+        {
+            "slug": "kostanay_region",
+            "region": "Қостанай облысы",
+            "image": null
+        },
+        {
+            "slug": "kyzylorda_region",
+            "region": "Қызылорда облысы",
+            "image": null
+        },
+        {
+            "slug": "mangystau_region",
+            "region": "Маңғыстау облысы",
+            "image": null
+        },
+        {
+            "slug": "north_kazakhstan_region",
+            "region": "Солтүстік Қазақстан облысы",
+            "image": null
+        },
+        {
+            "slug": "pavlodar_region",
+            "region": "Павлодар облысы",
+            "image": null
+        },
+        {
+            "slug": "shymkent_city",
+            "region": "Шымкент қаласы",
+            "image": null
+        },
+        {
+            "slug": "turkistan_region",
+            "region": "Түркістан облысы",
+            "image": null
+        },
+        {
+            "slug": "ulytau_region",
+            "region": "Ұлытау облысы",
+            "image": null
+        },
+        {
+            "slug": "west_kazakhstan_region",
+            "region": "Батыс Қазақстан облысы",
+            "image": null
+        },
+        {
+            "slug": "atyrau_region",
+            "region": "Атырау облысы",
+            "image": "/media/regions/atyrau_region.png"
+        }
+    ]
+}
